@@ -95,7 +95,8 @@ angular.module('myApp.view1', ['ngRoute'])
             "ThumbnailImage": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/025.png",
             "slug": "pikachu",
             "type": [
-                "electric"
+                "electric",
+                "fire"
             ]
         }, {
             "abilities": [
@@ -121,5 +122,15 @@ angular.module('myApp.view1', ['ngRoute'])
         }];
 
         $scope.myOrderProperty = 'id';
-
-    });
+        $scope.myOrderType = '';
+        //создаем список покемонов для использования в html
+        $scope.pokemontypesarray = [];
+        $scope.pokemons.forEach(pokemon => {
+            pokemon.type.forEach(type => {
+                let typeid = $scope.pokemontypesarray.findIndex(elem => elem===type);
+                if (typeid === -1) {
+                    $scope.pokemontypesarray.push(type);
+                };
+            });
+        });
+    })

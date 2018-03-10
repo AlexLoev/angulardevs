@@ -1,18 +1,34 @@
 Найти:
 <input ng-model="myQuery"><br><br>
 
+Рост покемона:
+<input ng-model="pocemonheight"><br><br>
+
 Сортировать по:
 <select ng-model="myOrderProperty">
     <option value="id">ID</option>
     <option value="weight">Весу</option>
+    <option value="name">Имени</option>
     <option value="height">Росту</option>
 </select>
 
-<ul>
-    <li ng-repeat="pokemon in pokemons | filter: myQuery | orderBy: myOrderProperty">
-        <img src="{{pokemon.ThumbnailImage}}">
+Тип сортировки:
+<select ng-model="myOrderType">
+    <option value="">По возрастанию</option>
+    <option value="0">По убыванию</option>
+</select>
 
-        <small>ID #{{pokemon.id }}</small>
+Тип покемона:
+<select ng-model="pokemontypes">
+    <option ng-repeat="type in pokemontypesarray | orderBy : ''" value="{{type}}">{{type}}</option>
+</select>
+
+<pre>Sort by = {{myOrderProperty}}; reverse = {{myOrderType}}</pre>
+<ul>
+    <li ng-repeat="pokemon in pokemons | filterbytype : pokemontypes | filter: {'name': myQuery} | filter: {'height' : pocemonheight } | orderBy: myOrderProperty : myOrderType">
+        <img src="{{pokemon.ThumbnailImage}}" onclick="alert(' {{pokemon.name}} ')">
+
+        <small>ID #{{pokemon.id}}</small>
         <h1>{{pokemon.name}}</h1>
         <p>Вес: {{pokemon.weight}}, рост: {{pokemon.height}}</p>
         <p>Тип: {{pokemon.type [0]}}</p>

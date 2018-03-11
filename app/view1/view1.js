@@ -9,7 +9,7 @@ angular.module('myApp.view1', ['ngRoute'])
         });
     }])
 
-    .controller('View1Ctrl', function ($scope) {
+    .controller('View1Ctrl', function ($window, $scope) {
         $scope.pokemons = [{
             "abilities": [
                 "Overgrow"
@@ -120,6 +120,11 @@ angular.module('myApp.view1', ['ngRoute'])
                 "normal"
             ]
         }];
+        
+        $scope.greet = function(event) {
+            $window.alert(event.currentTarget.id);
+        };
+
 
         $scope.myOrderProperty = 'id';
         $scope.myOrderType = '';
@@ -133,4 +138,4 @@ angular.module('myApp.view1', ['ngRoute'])
                 };
             });
         });
-    })
+    });

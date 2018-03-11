@@ -23,3 +23,23 @@
   content: "|";
   padding-right: 0.3em;
 }
+
+/*pokemon types color*/
+.electric {
+  color: navy;
+}
+.fire {
+  color: orangered;
+}
+.grass {
+  color: green;
+}
+.normal {
+  color: black;
+}
+.poison {
+  color: red;
+}
+.water {
+  color: aqua;
+}

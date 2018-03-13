@@ -25,11 +25,18 @@ config(function($stateProvider) {
             url: '/pokemons/:pokemonId',
             templateUrl: 'PokemonDetail/PokemonDetail.html',
             controller: 'PokemonDetailCtrl as vm'
-        }).state({
+        })
+        .state({
             name: 'detail.edit',
             url: '/edit',
             parent: 'detail',
             templateUrl: 'PokemonDetail/PokemonDetailEdit.html',
             controller: function() {}
+        })
+        .state({
+            name: 'myaccount',
+            url: '/myaccount',
+            templateUrl: 'MyAccount/MyAccount.html',
+            controller: 'MyAccountCtrl as vm'
         });
 });

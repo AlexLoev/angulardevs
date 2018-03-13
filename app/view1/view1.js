@@ -1,15 +1,8 @@
 'use strict';
 
-angular.module('myApp.view1', ['ngRoute'])
+angular.module('myApp.view1', [])
 
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/view1', {
-            templateUrl: 'view1/view1.html',
-            controller: 'View1Ctrl'
-        });
-    }])
-
-    .controller('View1Ctrl', function ($window, $scope) {
+    .controller('View1Ctrl', function ($scope) {
         $scope.pokemons = [{
             "abilities": [
                 "Overgrow"
@@ -95,8 +88,7 @@ angular.module('myApp.view1', ['ngRoute'])
             "ThumbnailImage": "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/025.png",
             "slug": "pikachu",
             "type": [
-                "electric",
-                "fire"
+                "electric"
             ]
         }, {
             "abilities": [
@@ -120,22 +112,7 @@ angular.module('myApp.view1', ['ngRoute'])
                 "normal"
             ]
         }];
-        
-        $scope.greet = function(event) {
-            $window.alert(event.currentTarget.id);
-        };
-
 
         $scope.myOrderProperty = 'id';
-        $scope.myOrderType = '';
-        //создаем список покемонов для использования в html
-        $scope.pokemontypesarray = [];
-        $scope.pokemons.forEach(pokemon => {
-            pokemon.type.forEach(type => {
-                let typeid = $scope.pokemontypesarray.findIndex(elem => elem===type);
-                if (typeid === -1) {
-                    $scope.pokemontypesarray.push(type);
-                };
-            });
-        });
+
     });

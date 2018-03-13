@@ -1,0 +1,34 @@
+<h3>Личный кабинет</h2>
+<form name="myaccountForm"  ng-submit="submit(vm.user)" novalidate>
+    <div class="form-group" ng-class="{'has-error': myaccountForm.username.$dirty && myaccountForm.username.$invalid }">
+        <label for="">Имя</label>
+        <input type="text" class="form-control" name="username" placeholder="Введите ваше имя" 
+            ng-model="vm.user.name" ng-required="true" ng-minlength="2">
+    </div>
+    <div ng-show="myaccountForm.username.$dirty">
+        <p ng-show="myaccountForm.username.$error.required">Поле Имя - обязательно</p>
+        <p ng-show="myaccountForm.username.$error.minlength">Длина должна быть более 2 символов</p>
+    </div>
+    <div class="form-group" ng-class="{'has-error': myaccountForm.useremail.$dirty && myaccountForm.useremail.$invalid }">
+        <label for="">Email</label>
+        <input type="email" class="form-control" name="useremail" placeholder="mail@mail.com" 
+            ng-model="vm.user.email" ng-required="true">
+    </div>
+    <div ng-show="myaccountForm.useremail.$dirty">
+        <p ng-show="myaccountForm.useremail.$error.required">Поле Email - обязательно</p>
+        <p ng-show="myaccountForm.useremail.$error.email">Email не соответствует формату, который указан в примере: mail@mail.com</p>
+    </div>
+    <div class="form-group" ng-class="{'has-error': myaccountForm.userphone.$dirty && myaccountForm.userphone.$invalid }">
+        <label for="">Телефон</label>
+        <input type="text" class="form-control" name="userphone" placeholder="+79261234567" 
+            ng-model="vm.user.phone" ng-pattern="/\+7[0-9]{10}$/">
+    </div>
+    <div ng-show="myaccountForm.userphone.$dirty">
+        <p ng-show="myaccountForm.userphone.$error.pattern">Номер телефона не соответствует формату, который указан в примере: +79261234567</p>
+    </div>
+    
+    <!-- <div>
+        {{myaccountForm.$error}}
+    </div> -->
+    <button type="submit" class="btn btn-primary" ng-disabled="myaccountForm.$invalid">Сохранить</button>
+</form>

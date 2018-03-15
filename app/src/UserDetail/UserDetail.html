@@ -6,21 +6,32 @@
 <div class="alert alert-danger" role="alert" ng-if="notfoundError">Пользователь не найден</div>
 
 <div class="media" ng-if="userLoaded">
-    <div class="media-body">
-
-        <h1 class="media-heading">{{user.username | uppercase }}</h1>
-        <p>
-            {{user.name}}</p>
-
+    <form name="userForm" novalidate>
+        <div class="form-group">
+            <label>Имя</label>
+            <input class="form-control" ng-model="user.name" type="text" placeholder="Имя" required>
+        </div>
+        <div class="form-group">
+            <label>Логин</label>
+            <input class="form-control" ng-model="user.username" type="text" placeholder="Логин">
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input class="form-control" ng-model="user.email" type="text" placeholder="Email">
+        </div>
+        <button type="submit btn" class="btn btn-primary" ng-click="editUser(user.id)" ng-disabled="userForm.$invalid">
+            <span class="glyphicon glyphicon-save"></span>
+            Сохранить
+        </button>
         <button class="btn btn-danger" ng-click="deleteUser(user.id)">
             <span class="glyphicon glyphicon-trash"></span>
             Удалить
         </button>
-        <a class="btn btn-primary" href="#!/edit/{{user.id}}">
-            Редактировать
-        </a>
+    </form>    
+    <p></p>
+    <div class="alert alert-danger" role="alert" ng-if="editionError">Не удалось сохранить!</div>
+    <div class="alert alert-success" role="alert" ng-if="editionSuccess">Сохранение прошло удачно!</div>
 
-    </div>
 </div>
 
 <div class="alert alert-success" role="alert" ng-if="deletionSuccess">Пока, пользователь!</div>

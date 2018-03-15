@@ -1,11 +1,14 @@
 angular
 .module('UserApp')
-.factory('UsersService', function($http) {
+.factory('UsersService', function($http, $timeout) {
 
         return {
 
             getUsers: function() {
-                return $http.get('https://jsonplaceholder.typicode.com/users/');
+
+                return $timeout(function() {
+                    return $http.get('https://jsonplaceholder.typicode.com/users/')
+                }, 1000);
             },
 
             getUser: function(userId) {
@@ -19,14 +22,19 @@ angular
                     data: userData
                 });
             },
-
+            editUser: function(userId, userData) {
+                return $http({
+                    method: 'PUT',
+                    url: 'https://jsonplaceholder.typicode.com/users/' + userId,
+                    data: userData
+                });
+            },
             deleteUser: function(userId) {
                 return $http({
                     method: 'DELETE',
                     url: 'https://jsonplaceholder.typicode.com/users/' + userId
                 });
             }
-
         }
 
     }

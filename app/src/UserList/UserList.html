@@ -2,6 +2,10 @@
     <div class="col-md-8">
 
         <div class="list-group">
+            <div class="alert alert-info" ng-show="UsersLoading">
+                <span class="glyphicon glyphicon-refresh"></span>
+                Идет загрузка списка пользователей
+            </div> 
             <a href="#!/users/{{singleUser.id }}" class="list-group-item" ng-repeat="singleUser in users">
 
                 <h4>
@@ -19,6 +23,10 @@
     <div class="col-md-4">
 
         <div class="list-group">
+            <div class="alert alert-info" ng-show="PostsLoading">
+                <span class="glyphicon glyphicon-refresh"></span>
+                Идет загрузка списка постов
+            </div> 
             <div class="list-group-item" ng-repeat="singlePost in posts">
 
                 <p>

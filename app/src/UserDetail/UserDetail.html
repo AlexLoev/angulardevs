@@ -21,6 +21,22 @@
         </a>
 
     </div>
+    <p></p>
+    <div class="list-group">
+        <div class="list-group-item" ng-repeat="singlePost in posts">
+
+            <p>
+                <b>{{singlePost.title }}</b>
+            </p>
+            <p>
+                {{singlePost.body}}
+            </p>
+
+            </a>
+        </div>
+
+    </div>
+
 </div>
 
 <div class="alert alert-success" role="alert" ng-if="deletionSuccess">Пока, пользователь!</div>

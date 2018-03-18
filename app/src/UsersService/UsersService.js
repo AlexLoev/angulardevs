@@ -9,3 +9,8 @@ angular
       }
     })
   })
+  .factory('UsersPosts', function ($resource, $http) {
+    return $resource('https://jsonplaceholder.typicode.com/users/:userId/posts/', {
+      userId: '@userId'
+    });
+  })

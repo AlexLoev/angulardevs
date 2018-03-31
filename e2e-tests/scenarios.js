@@ -1,19 +1,18 @@
 'use strict';
 
 /* https://github.com/angular/protractor/blob/master/docs/toc.md */
-
+/**функция притормаживания для protractor, чтобы можно было смотреть процесс тестирования в браузере */
 var origFn = browser.driver.controlFlow().execute;
 browser.driver.controlFlow().execute = function () {
   var args = arguments;
-  // queue 100ms wait
   origFn.call(browser.driver.controlFlow(), function () {
-    return protractor.promise.delayed(100);   // here we can adjust the execution speed
+    return protractor.promise.delayed(80); 
   });
   return origFn.apply(browser.driver.controlFlow(), args);
-  // console.log('something');
 };
 
 describe('my app', function() {
+  
   describe('should highlighted btn-primary depends of routes', function() {
     it('highlighted "Список"', function() {
       browser.get('index.html#!/list');
@@ -33,7 +32,6 @@ describe('my app', function() {
   });
 
   describe('page /myaccount', function() {
-    //beforeEach(origFn);
     beforeAll(function() {
       browser.get('index.html#!/myaccount');
     });
@@ -57,21 +55,20 @@ describe('my app', function() {
 
   });
   
-  describe('showlist add pokemon to cart', {
-    
+  describe('page /list', function() {
+    var pokemons = [];
+    const pokemonscount = 835;
+    beforeAll(function() {
+      browser.get('index.html#!/list');
+      pokemons = element.all(by.repeater('vm.pokemons'));
+    });
+    it(`should have list of ${pokemonscount} pokemons`, function() {
+      expect(pokemons.count()).toBe(pokemonscount);
+    });
+    it('should add first pokemon to shoping cart', function() {
+      pokemons.first().element(by.buttonText('Add')).click();
+      var cartItems = element.all(by.repeater('$ctrl.cartItems'));
+      expect(cartItems.count()).toBeGreaterThan(0);
+    });
   });
-
-  // describe('view2', function() {
-
-  //   beforeEach(function() {
-  //     browser.get('index.html#!/view2');
-  //   });
-
-
-  //   it('should render view2 when user navigates to /view2', function() {
-  //     expect(element.all(by.css('[ng-view] p')).first().getText()).
-  //       toMatch('/partial for view 2/');
-  //   });
-
-  // });
 });

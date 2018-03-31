@@ -1,42 +1,47 @@
 'use strict';
 
-userApp.controller('UserDetailCtrl', function($scope, $routeParams, UsersService) {
+userApp.component('userDetail', {
 
-    $scope.userLoaded = false;
-
-    $scope.user = UsersService.get({
-        userId: $routeParams['userId']
-    }, function(successResult) {
-        // Окей!
-        $scope.notfoundError = false;
-        $scope.userLoaded = true;
-
-        $scope.activeTab = 1;
-        $scope.disableControlTab = true;
-    }, function(errorResult) {
-        // Не окей..
-        $scope.notfoundError = true;
-        $scope.userLoaded = true;
-
-
-    });
-
-    $scope.user.$promise.then(function(result) {
-        //$scope.userLoaded = true;
-    });
-
-    $scope.deleteUser = function(userId) {
-
-        $scope.user.$delete({
-            userId: userId
+    controller: function UserDetailCtrl($routeParams, UsersService) {
+        const ctrl = this;
+        ctrl.userLoaded = false;
+    
+        ctrl.user = UsersService.get({
+            userId: $routeParams['userId']
         }, function(successResult) {
             // Окей!
-            $scope.deletionSuccess = true;
+            ctrl.notfoundError = false;
+            ctrl.userLoaded = true;
+    
+            ctrl.activeTab = 0;
+            
         }, function(errorResult) {
             // Не окей..
-            $scope.deletionError = true;
+            ctrl.notfoundError = true;
+            //this.userLoaded = true;
+    
+    
         });
-
-    }
-
+    
+        ctrl.user.$promise.then(function(result) {
+            //this.userLoaded = true;
+        });
+    
+        ctrl.deleteUser = function(userId) {
+    
+            ctrl.user.$delete({
+                userId: userId
+            }, function(successResult) {
+                // Окей!
+                ctrl.deletionSuccess = true;
+                ctrl.disableControlTab = true;
+            }, function(errorResult) {
+                // Не окей..
+                ctrl.deletionError = true;
+            });
+    
+        }
+    
+    },
+    templateUrl: './src/UserDetail/UserDetail.html'
 });

@@ -1,33 +1,42 @@
 <div ng-if="!$ctrl.userLoaded">
-    <span class="glyphicon glyphicon-refresh"></span>
-    Loading...
+    <!-- <span class="glyphicon glyphicon-refresh"></span> -->
+    <md-progress-circular md-mode="indeterminate" md-diameter="30"></md-progress-circular>
+
+    <!-- Loading... -->
 </div>
 
 <div class="alert alert-danger" role="alert" ng-if="notfoundError">Пользователь не найден</div>
 
-<uib-tabset active="$ctrl.activeTab">
+<md-card>
 
-    <uib-tab heading="Инфо" disable="$ctrl.disableControlTab">
-
-        <h1 class="media-heading">{{$ctrl.user.username | uppercase }}</h1>
+    <!-- <uib-tab heading="Инфо" disable="$ctrl.disableControlTab"> -->
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">{{$ctrl.user.name}}</span>
+            <span class="md-subhead">{{$ctrl.user.username | uppercase }}</span>
+        </md-card-title-text>
+    </md-card-title>
+        <!-- <h1 class="media-heading">{{$ctrl.user.username | uppercase }}</h1>
         <p>
-            {{$ctrl.user.name}}</p>
+            {{$ctrl.user.name}}
+        </p> -->
 
-    </uib-tab>
+    <!-- </uib-tab> -->
 
-    <uib-tab heading="Операции" >
-
-        <button class="btn btn-danger" ng-click="$ctrl.deleteUser($ctrl.user.id)">
-            <span class="glyphicon glyphicon-trash"></span>
+    <!-- <uib-tab heading="Операции" > -->
+    <md-card-actions>
+        <md-button class="md-primary md-raised" ng-click="$ctrl.deleteUser($ctrl.user.id)">
+            <!-- <span class="glyphicon glyphicon-trash"></span> -->
             Удалить
-        </button>
-        <a class="btn btn-primary" href="#!/edit/{{$ctrl.user.id}}">
+        </md-button>
+        <md-button class="md-warn md-raised" ng-href="#!/edit/{{$ctrl.user.id}}">
             Редактировать
-        </a>
+        </md-button>
+    </md-card-actions>
 
-    </uib-tab>
+    <!-- </uib-tab> -->
 
-</uib-tabset>
+</md-card>
 
 <div class="alert alert-success" role="alert" ng-if="$ctrl.deletionSuccess">Пока, пользователь!</div>
 <div class="alert alert-danger" role="alert" ng-if="$ctrl.deletionError">Пользователи не сдаются!</div>

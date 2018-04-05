@@ -41,20 +41,22 @@ describe('my app', function() {
     it('should disable submit button cause of required fields', function() {
       expect(element(by.name('myaccountSubmit')).isEnabled()).toBe(false);
     });
-    it('fill the controls', function() {
-      var username = element(by.name('username'));
-      expect(username.isPresent()).toBe(true);
-      username.sendKeys('test user');
-      var useremail = element(by.name('useremail'));
-      expect(useremail.isPresent()).toBe(true);
-      useremail.sendKeys('test@test.com');
+    describe('check required fields', function() {
+      beforeAll(function() {
+        var username = element(by.name('username'));
+        var useremail = element(by.name('useremail'));
+        username.sendKeys('test user');
+        useremail.sendKeys('test@test.com');
+      });
+  
+      it('should enabled submit button cause required fields was filling before', function() {
+        expect(element(by.name('myaccountSubmit')).isEnabled()).toBe(true);
+      });
     });
-    it('should enabled submit button cause of filling required fields', function() {
-      expect(element(by.name('myaccountSubmit')).isEnabled()).toBe(true);
-    });
-
   });
   
+  
+
   describe('page /list', function() {
     var pokemons = [];
     const pokemonscount = 835;
